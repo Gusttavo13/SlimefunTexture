@@ -1,0 +1,9 @@
+name: SlimefunTexture
+version: '${project.version}'
+main: club.thornya.slimefuntexture.SlimefunTexture
+api-version: 1.19
+authors: [Gusttavo13]
+description: Coloca textura no jogador automaticamente
+commands:
+  textura:
+    description: Textura Editor
