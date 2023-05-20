@@ -16,8 +16,7 @@ public class EventResourcePack implements Listener {
     @EventHandler
     public void onResourcePackStatus(PlayerResourcePackStatusEvent e){
         if(e.getStatus() == PlayerResourcePackStatusEvent.Status.ACCEPTED){
-            e.getPlayer().sendMessage(Objects.requireNonNull(Config.get().getString("messages.thanks")).replace("&", "§"));
-
+            Config.sendString("messages.thanks", e.getPlayer());
         }
         if(e.getStatus() == PlayerResourcePackStatusEvent.Status.FAILED_DOWNLOAD){
             e.getPlayer().sendMessage("§cOPS! Parece que ocorreu um erro.");

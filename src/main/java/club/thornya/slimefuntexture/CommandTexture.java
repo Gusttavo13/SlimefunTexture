@@ -1,13 +1,9 @@
 package club.thornya.slimefuntexture;
 
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.protocol.game.ClientboundResourcePackPacket;
-import net.minecraft.server.level.ServerPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_19_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 import java.util.Objects;
@@ -35,14 +31,35 @@ public class CommandTexture implements CommandExecutor {
                             Config.save();
                             Config.reload();
                             p.sendMessage("§bTextura definida com sucesso - §e" + args[1]);
+                        }
+                        if(args[0].equalsIgnoreCase("reload")){
+                            Player target = Bukkit.getPlayerExact(args[1]);
+                            if(target != null){
+                                if(target.isOnline()){
+                                    if(Config.get().contains("players."+target.getUniqueId())) {
+                                        if (Config.get().getBoolean("players." + target.getUniqueId())) {
+                                            SlimefunTexture.applyTexture(target);
+                                            p.sendMessage("§aVocê recarregou a textura de §c" + target.getName());
+                                        }else {
+                                            p.sendMessage("§cEsse jogador não aceitou a textura.");
+                                        }
+                                    }else {
+                                        p.sendMessage("§cEsse jogador não aceitou a textura.");
+                                    }
+                                }else{
+                                    p.sendMessage("§cEsse jogador está offline.");
+                                }
+                            }else{
+                                p.sendMessage("§cEsse jogador está offline.");
+                            }
                         }else{
-                            p.sendMessage(Objects.requireNonNull(Config.get().getString("messages.usage")).replace("&", "§"));
+                            Config.sendStringList("messages.usage", p);
                         }
                     }else{
-                        p.sendMessage(Objects.requireNonNull(Config.get().getString("messages.usage")).replace("&", "§"));
+                        Config.sendStringList("messages.usage", p);
                     }
                 }else{
-                    p.sendMessage(Objects.requireNonNull(Config.get().getString("messages.player_usage")).replace("&", "§"));
+                    Config.sendString("messages.player_usage", p);
                 }
             }
         }
