@@ -1,6 +1,11 @@
 package club.thornya.slimefuntexture;
 
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ClientboundResourcePackPacket;
+import net.minecraft.server.level.ServerPlayer;
 import org.bukkit.Bukkit;
+import org.bukkit.craftbukkit.v1_19_R3.entity.CraftPlayer;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.InputStream;
@@ -30,6 +35,11 @@ public final class SlimefunTexture extends JavaPlugin {
 
     }
 
+    public static void applyTexture(Player player){
+        ServerPlayer sp = ((CraftPlayer) player).getHandle();
+        String url = Config.get().getString("url");
+        sp.connection.send(new ClientboundResourcePackPacket(url, checkHashURL(url), false, Component.nullToEmpty(Objects.requireNonNull(Config.get().getString("messages.message_resourcepack")).replace("&", "§"))));
+    }
     public static String checkHashURL(String input) {
         try {
             MessageDigest sha1 = MessageDigest.getInstance("SHA1");

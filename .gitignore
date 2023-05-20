@@ -96,6 +96,7 @@ $RECYCLE.BIN/
 *.lnk
 
 target/
+config.yml
 pom.xml
 pom.xml.tag
 pom.xml.releaseBackup

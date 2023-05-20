@@ -28,9 +28,7 @@ public class EventResourcePack implements Listener {
     public void onJoin(PlayerJoinEvent e){
         if(Config.get().contains("players."+e.getPlayer().getUniqueId())){
             if(Config.get().getBoolean("players."+e.getPlayer().getUniqueId())) {
-                ServerPlayer sp = ((CraftPlayer) e.getPlayer()).getHandle();
-                String url = Config.get().getString("url");
-                sp.connection.send(new ClientboundResourcePackPacket(url, SlimefunTexture.checkHashURL(url), false, Component.nullToEmpty(Objects.requireNonNull(Config.get().getString("messages.message_resourcepack")).replace("&", "§"))));
+                SlimefunTexture.applyTexture(e.getPlayer());
             }
         }
 

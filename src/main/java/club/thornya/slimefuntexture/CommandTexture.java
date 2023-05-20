@@ -24,9 +24,7 @@ public class CommandTexture implements CommandExecutor {
         if (command.getName().equalsIgnoreCase("textura")){
             Player p = (Player) sender;
             if(args.length == 0){
-                String url = Config.get().getString("url");
-                ServerPlayer sp = ((CraftPlayer) p).getHandle();
-                sp.connection.send(new ClientboundResourcePackPacket(url, SlimefunTexture.checkHashURL(url), false, Component.nullToEmpty(Objects.requireNonNull(Config.get().getString("messages.message_resourcepack")).replace("&", "§"))));
+                SlimefunTexture.applyTexture(p);
                 Config.savePlayer(p.getUniqueId().toString());
             }
             if(args.length > 0){
