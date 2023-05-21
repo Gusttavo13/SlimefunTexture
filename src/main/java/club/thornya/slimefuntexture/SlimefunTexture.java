@@ -1,6 +1,7 @@
 package club.thornya.slimefuntexture;
 
 import club.thornya.slimefuntexture.commands.textura.CommandTexture;
+import club.thornya.slimefuntexture.commands.textura.TabTexture;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundResourcePackPacket;
 import net.minecraft.server.level.ServerPlayer;
@@ -28,6 +29,7 @@ public final class SlimefunTexture extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage(" ");
 
         Objects.requireNonNull(Bukkit.getPluginCommand("textura")).setExecutor(new CommandTexture());
+        Objects.requireNonNull(Bukkit.getPluginCommand("textura")).setTabCompleter(new TabTexture());
         Bukkit.getPluginManager().registerEvents(new EventResourcePack(), this);
 
     }
