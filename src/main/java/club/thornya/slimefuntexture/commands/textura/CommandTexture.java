@@ -1,16 +1,18 @@
-package club.thornya.slimefuntexture;
+package club.thornya.slimefuntexture.commands.textura;
 
+import club.thornya.slimefuntexture.Config;
+import club.thornya.slimefuntexture.SlimefunTexture;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import java.util.Objects;
+import org.jetbrains.annotations.NotNull;
 
 public class CommandTexture implements CommandExecutor {
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
 
         if (command instanceof Player){
             Bukkit.getConsoleSender().sendMessage("§cComando executado somente por jogadores!");

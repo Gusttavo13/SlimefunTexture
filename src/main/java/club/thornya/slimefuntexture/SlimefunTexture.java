@@ -1,5 +1,6 @@
 package club.thornya.slimefuntexture;
 
+import club.thornya.slimefuntexture.commands.textura.CommandTexture;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundResourcePackPacket;
 import net.minecraft.server.level.ServerPlayer;
@@ -13,12 +14,8 @@ import java.net.URL;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.util.Objects;
-
 public final class SlimefunTexture extends JavaPlugin {
-
     public static SlimefunTexture ST = null;
-    public static Config c = null;
-
     @Override
     public void onEnable() {
         ST = this;
@@ -40,6 +37,7 @@ public final class SlimefunTexture extends JavaPlugin {
         String url = Config.get().getString("url");
         sp.connection.send(new ClientboundResourcePackPacket(url, checkHashURL(url), false, Component.nullToEmpty(Objects.requireNonNull(Config.get().getString("messages.message_resourcepack")).replace("&", "§"))));
     }
+    @SuppressWarnings("all")
     public static String checkHashURL(String input) {
         try {
             MessageDigest sha1 = MessageDigest.getInstance("SHA1");
@@ -47,8 +45,6 @@ public final class SlimefunTexture extends JavaPlugin {
 
             try {
                 is = new DigestInputStream(is, sha1);
-
-                int b;
 
                 byte[] ignoredBuffer = new byte[8 * 1024]; // Up to 8K per read
                 while (is.read(ignoredBuffer) > 0) {}

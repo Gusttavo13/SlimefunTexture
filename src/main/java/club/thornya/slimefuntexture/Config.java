@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,6 +15,7 @@ public class Config {
     private static File file;
     private static FileConfiguration configuration;
 
+    @SuppressWarnings("all")
     public static void setup(String path, SlimefunTexture main){
         file = new File(main.getDataFolder(), path);
         if(!file.exists()){
@@ -57,9 +57,7 @@ public class Config {
     }
 
     public static void sendStringList(String path, Player p){
-        Config.get().getStringList(path).forEach(s -> {
-            p.sendMessage(s.replace("&", "§"));
-        });
+        Config.get().getStringList(path).forEach(s -> p.sendMessage(s.replace("&", "§")));
     }
     public static void sendString(String path, Player p){
             p.sendMessage(Objects.requireNonNull(Config.get().getString(path)).replace("&", "§"));
