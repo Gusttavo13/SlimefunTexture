@@ -78,6 +78,31 @@ public class CommandTexture implements CommandExecutor {
                         }else{
                             Config.sendStringList("messages.usage", p);
                         }
+                        if(args[0].equalsIgnoreCase("remove")){
+                            Player target = Bukkit.getPlayerExact(args[1]);
+                            if(target != null){
+                                if(target.isOnline()){
+                                    if(Config.get().contains("players."+target.getUniqueId())) {
+                                        if (Config.get().getBoolean("players." + target.getUniqueId())) {
+                                            Config.get().set("players." + target.getUniqueId(), false);
+                                            Config.save();
+                                            Config.reload();
+                                            p.sendMessage("§aVocê removeu a textura de §c" + target.getName());
+                                        }else {
+                                            p.sendMessage("§cEsse jogador já está com a textura desativada.");
+                                        }
+                                    }else {
+                                        p.sendMessage("§cEsse jogador não aceitou a textura.");
+                                    }
+                                }else{
+                                    p.sendMessage("§cEsse jogador está offline.");
+                                }
+                            }else{
+                                p.sendMessage("§cEsse jogador está offline.");
+                            }
+                        }else{
+                            Config.sendStringList("messages.usage", p);
+                        }
                     }else{
                         Config.sendStringList("messages.usage", p);
                     }
