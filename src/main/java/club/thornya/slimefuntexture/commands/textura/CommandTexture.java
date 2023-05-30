@@ -33,8 +33,7 @@ public class CommandTexture implements CommandExecutor {
                             Config.save();
                             Config.reload();
                             p.sendMessage("§bTextura definida com sucesso - §e" + args[1]);
-                        }
-                        if(args[0].equalsIgnoreCase("reload")){
+                        }else if(args[0].equalsIgnoreCase("reload")){
                             Player target = Bukkit.getPlayerExact(args[1]);
                             if(target != null){
                                 if(target.isOnline()){
@@ -44,6 +43,28 @@ public class CommandTexture implements CommandExecutor {
                                             p.sendMessage("§aVocê recarregou a textura de §c" + target.getName());
                                         }else {
                                             p.sendMessage("§cEsse jogador não aceitou a textura.");
+                                        }
+                                    }else {
+                                        p.sendMessage("§cEsse jogador não aceitou a textura.");
+                                    }
+                                }else{
+                                    p.sendMessage("§cEsse jogador está offline.");
+                                }
+                            }else{
+                                p.sendMessage("§cEsse jogador está offline.");
+                            }
+                        }else if(args[0].equalsIgnoreCase("remove")){
+                            Player target = Bukkit.getPlayerExact(args[1]);
+                            if(target != null){
+                                if(target.isOnline()){
+                                    if(Config.get().contains("players."+target.getUniqueId())) {
+                                        if (Config.get().getBoolean("players." + target.getUniqueId())) {
+                                            Config.get().set("players." + target.getUniqueId(), false);
+                                            Config.save();
+                                            Config.reload();
+                                            p.sendMessage("§aVocê removeu a textura de §c" + target.getName());
+                                        }else {
+                                            p.sendMessage("§cEsse jogador já está com a textura desativada.");
                                         }
                                     }else {
                                         p.sendMessage("§cEsse jogador não aceitou a textura.");
