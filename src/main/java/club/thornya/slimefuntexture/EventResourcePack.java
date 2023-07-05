@@ -1,15 +1,9 @@
 package club.thornya.slimefuntexture;
 
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.protocol.game.ClientboundResourcePackPacket;
-import net.minecraft.server.level.ServerPlayer;
-import org.bukkit.craftbukkit.v1_19_R3.entity.CraftPlayer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerResourcePackStatusEvent;
-
-import java.util.Objects;
 
 public class EventResourcePack implements Listener {
 
